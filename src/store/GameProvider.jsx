@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import GameContext from './gameContext';
 
 const defaultState = {
-  currentStage: 'welcome',
+  currentStage: {
+    title: 'Welcome!',
+    subtitle: 'Ready to play?',
+    text: 'Please, select your game preferences',
+    btnText: 'Select',
+  },
 };
 
 const gameReducer = (state, action) => {
