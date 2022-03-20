@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 
-const Options = ({ content }) => {
+const Options = ({ id, content, onValidate }) => {
   const checks = content.map((checkbox) => ({
     name: checkbox,
     active: false,
@@ -22,6 +22,8 @@ const Options = ({ content }) => {
     const updatedChecks = [...checks];
     updatedChecks[inputIndex] = updatedInput;
     setInputsCheck(updatedChecks);
+
+    onValidate(id);
   };
 
   const buttons = content.map((buttonName) => (
@@ -37,6 +39,8 @@ const Options = ({ content }) => {
 };
 
 Options.propTypes = {
+  id: PropTypes.string.isRequired,
   content: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onValidate: PropTypes.func.isRequired,
 };
 export default Options;
