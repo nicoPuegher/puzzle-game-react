@@ -1,0 +1,16 @@
+.button {
+  font-size: 1.1rem;
+  width: 100%;
+  margin-bottom: 0.6rem;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.button.active {
+  color: var(--dark);
+  background-color: var(--primary);
+  box-shadow: 0rem 0.25rem var(--dark);
+}
+
+.button input {
+  display: none;
+}
