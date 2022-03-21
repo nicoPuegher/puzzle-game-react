@@ -1,10 +1,17 @@
 import PropTypes from 'prop-types';
 import styles from './Puzzle.module.css';
+import puzzleId from '../../helpers/puzzleId';
 import TableRow from './TableRow/TableRow';
 
 const Puzzle = ({ playerSettings }) => {
   const size = +playerSettings.size.slice(0, 1);
   const movesLimit = 200;
+  const tableRow = [];
+
+  for (let row = 0; row < size; row += 1) {
+    const idArr = puzzleId(size, row);
+    tableRow.push(<TableRow key={`tr${row + 1}`} id={idArr} size={size} />);
+  }
 
   return (
     <section className={styles.puzzle}>
@@ -15,9 +22,7 @@ const Puzzle = ({ playerSettings }) => {
       </header>
       <main>
         <table>
-          <tbody>
-            <TableRow size={size} />
-          </tbody>
+          <tbody>{tableRow}</tbody>
         </table>
       </main>
     </section>
