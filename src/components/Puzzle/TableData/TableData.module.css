@@ -1,0 +1,75 @@
+.td {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 0.3rem;
+  background-color: var(--dark);
+}
+
+.td.small3 {
+  width: 5rem;
+  height: 5rem;
+}
+
+.td.small4 {
+  width: 3.8rem;
+  height: 3.8rem;
+}
+
+td.small5 {
+  width: 3rem;
+  height: 3rem;
+}
+
+.td.medium3 {
+  width: 5rem;
+  height: 5rem;
+}
+
+.td.medium4 {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+td.medium5 {
+  width: 3.6rem;
+  height: 3.6rem;
+}
+
+.td.big3 {
+  width: 6.5rem;
+  height: 6.5rem;
+}
+
+.td.big4 {
+  width: 5rem;
+  height: 5rem;
+}
+
+td.big5 {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+@media (min-width: 280px) and (max-width: 360px) {
+  .td {
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .td {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .td {
+    cursor: pointer;
+  }
+
+  .td:hover {
+    color: var(--dark);
+    background-color: var(--gray);
+  }
+}
