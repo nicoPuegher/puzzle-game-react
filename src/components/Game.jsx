@@ -5,11 +5,16 @@ import Settings from './Settings/Settings';
 import Puzzle from './Puzzle/Puzzle';
 
 const Game = () => {
-  const [gameScreen, setGameScreen] = useState('play');
   const gameCtx = useContext(GameContext);
+  const [gameScreen, setGameScreen] = useState('play');
+  const [playerSettings, setPlayerSettings] = useState({ mode: '', size: '' });
 
   const changeScreenHandler = (screen) => {
     setGameScreen(screen);
+  };
+
+  const submitHandler = (settings) => {
+    setPlayerSettings(settings);
   };
 
   return (
@@ -23,8 +28,13 @@ const Game = () => {
           onChangeScreen={changeScreenHandler}
         />
       )}
-      {gameScreen === 'settings' && <Settings />}
-      {gameScreen === 'puzzle' && <Puzzle />}
+      {gameScreen === 'settings' && (
+        <Settings
+          onSubmit={submitHandler}
+          onChangeScreen={changeScreenHandler}
+        />
+      )}
+      {gameScreen === 'puzzle' && <Puzzle playerSettings={playerSettings} />}
     </>
   );
 };

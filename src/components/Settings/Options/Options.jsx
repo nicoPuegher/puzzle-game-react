@@ -23,7 +23,7 @@ const Options = ({ id, content, onValidate }) => {
     updatedChecks[inputIndex] = updatedInput;
     setInputsCheck(updatedChecks);
 
-    onValidate(id);
+    onValidate(id, input.name);
   };
 
   const buttons = content.map((buttonName) => (

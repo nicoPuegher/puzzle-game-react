@@ -1,0 +1,57 @@
+.puzzle p {
+  margin-bottom: 0.5rem;
+}
+
+.puzzle span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0.1rem 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.3rem;
+  background-color: var(--complementary);
+}
+
+.puzzle table {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--complementary);
+}
+
+.puzzle td {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 0.3rem;
+  background-color: var(--dark);
+}
+
+@media (min-width: 280px) and (max-width: 360px) {
+  .puzzle td {
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .puzzle span {
+    font-size: 2.25rem;
+  }
+
+  .puzzle table {
+    padding: 1rem;
+  }
+
+  .puzzle td {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .puzzle td {
+    cursor: pointer;
+  }
+
+  .puzzle td:hover {
+    color: var(--dark);
+    background-color: var(--gray);
+  }
+}

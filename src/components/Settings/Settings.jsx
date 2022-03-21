@@ -1,21 +1,27 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import styles from './Settings.module.css';
 import Options from './Options/Options';
 
-const Settings = () => {
+const Settings = ({ onSubmit, onChangeScreen }) => {
   const [isDisabled, setIsDisabled] = useState({ mode: true, size: true });
+  const [playerSettings, setPlayerSettings] = useState({ mode: '', size: '' });
 
   const submitHandler = (event) => {
     event.preventDefault();
+    onSubmit(playerSettings);
+    onChangeScreen('puzzle');
   };
 
-  const validate = (id) => {
+  const validate = (id, settings) => {
     if (id === '1') {
       setIsDisabled((prevState) => ({ ...prevState, mode: false }));
+      setPlayerSettings((prevState) => ({ ...prevState, mode: settings }));
     }
 
     if (id === '2') {
       setIsDisabled((prevState) => ({ ...prevState, size: false }));
+      setPlayerSettings((prevState) => ({ ...prevState, size: settings }));
     }
   };
 
@@ -40,6 +46,11 @@ const Settings = () => {
       </button>
     </form>
   );
+};
+
+Settings.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  onChangeScreen: PropTypes.func.isRequired,
 };
 
 export default Settings;
