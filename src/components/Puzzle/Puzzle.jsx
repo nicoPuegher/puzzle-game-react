@@ -4,9 +4,9 @@ import puzzleId from '../../helpers/puzzleId';
 import TableRow from './TableRow/TableRow';
 
 const Puzzle = ({ playerSettings }) => {
-  const size = +playerSettings.size.slice(0, 1);
-  const movesLimit = 200;
   const tableRow = [];
+  const movesLimit = 200;
+  const size = +playerSettings.size.slice(0, 1);
 
   for (let row = 0; row < size; row += 1) {
     const idArr = puzzleId(size, row);
