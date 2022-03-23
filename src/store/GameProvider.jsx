@@ -9,12 +9,29 @@ const defaultState = {
     text: 'Please, select your game preferences',
     btnText: 'Select',
   },
+  victoryArr: [],
+  playerArr: [],
 };
 
 const gameReducer = (state, action) => {
   if (action.type === 'STAGE') {
     return {
+      ...state,
       currentStage: action.playerStage,
+    };
+  }
+
+  if (action.type === 'WINARR') {
+    return {
+      ...state,
+      victoryArr: action.currentVictoryArr,
+    };
+  }
+
+  if (action.type === 'PLAYERARR') {
+    return {
+      ...state,
+      playerArr: action.currentPlayerArr,
     };
   }
 
@@ -31,12 +48,30 @@ const GameProvider = ({ children }) => {
     });
   };
 
+  const currentVictoryHandler = (currentVictoryArr) => {
+    dispatchGameAction({
+      type: 'WINARR',
+      currentVictoryArr,
+    });
+  };
+
+  const currentPlayerHandler = (currentPlayerArr) => {
+    dispatchGameAction({
+      type: 'PLAYERARR',
+      currentPlayerArr,
+    });
+  };
+
   const gameContext = useMemo(
     () => ({
       currentStage: gameState.currentStage,
+      victoryArr: gameState.victoryArr,
+      playerArr: gameState.playerArr,
       playerStage: playerStageHandler,
+      currentVictory: currentVictoryHandler,
+      currentPlayer: currentPlayerHandler,
     }),
-    [gameState.currentStage]
+    [gameState]
   );
 
   return (

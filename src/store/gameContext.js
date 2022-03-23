@@ -8,7 +8,11 @@ const GameContext = React.createContext({
     text: '',
     btnText: '',
   },
+  victoryArr: [],
+  playerArr: [],
   playerStage: (stage) => {},
+  currentVictory: (currentVictoryArr) => {},
+  currentPlayer: (currentPlayerArr) => {},
 });
 
 export default GameContext;
