@@ -5,13 +5,14 @@ import PropTypes from 'prop-types';
 import styles from './TableData.module.css';
 import checkScreen from '../../../helpers/checkScreen';
 import GameContext from '../../../store/gameContext';
+import blocksMovement from '../../../helpers/blocksMovement';
 
 const TableData = ({ id, size }) => {
   const gameCtx = useContext(GameContext);
   const responsive = checkScreen(size);
 
   const clickHandler = (event) => {
-    console.log(event);
+    blocksMovement(+event.target.id, size);
   };
 
   return (

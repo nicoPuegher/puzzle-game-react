@@ -1,3 +1,5 @@
+import updateBlankPosition from './updateBlankPosition';
+
 const gameArrays = (size) => {
   const victoryArr = [];
   let playerArr = [];
@@ -10,6 +12,7 @@ const gameArrays = (size) => {
 
   victoryArr.splice(0, 0, 'empty');
   victoryArr.splice(victoryArr.length - 1, 1, '');
+  updateBlankPosition(victoryArr.indexOf(''));
 
   playerArr = [...victoryArr];
 
