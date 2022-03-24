@@ -1,6 +1,7 @@
 import React, { useReducer, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import GameContext from './gameContext';
+import updateBlankPosition from '../helpers/updateBlankPosition';
 
 const defaultState = {
   currentStage: {
@@ -35,6 +36,23 @@ const gameReducer = (state, action) => {
     };
   }
 
+  if (action.type === 'MOVEMENT') {
+    const clickedBlock = action.id;
+    const blankBlock = state.playerArr.indexOf('');
+
+    const newArr = JSON.parse(JSON.stringify(state.playerArr));
+    newArr[blankBlock] = newArr[clickedBlock];
+    newArr[clickedBlock] = '';
+
+    const updatedBlank = newArr.indexOf('');
+    updateBlankPosition(updatedBlank);
+
+    return {
+      ...state,
+      playerArr: newArr,
+    };
+  }
+
   return defaultState;
 };
 
@@ -62,6 +80,13 @@ const GameProvider = ({ children }) => {
     });
   };
 
+  const blocksMoveHandler = (id) => {
+    dispatchGameAction({
+      type: 'MOVEMENT',
+      id,
+    });
+  };
+
   const gameContext = useMemo(
     () => ({
       currentStage: gameState.currentStage,
@@ -70,6 +95,7 @@ const GameProvider = ({ children }) => {
       playerStage: playerStageHandler,
       currentVictory: currentVictoryHandler,
       currentPlayer: currentPlayerHandler,
+      blocksMove: blocksMoveHandler,
     }),
     [gameState]
   );

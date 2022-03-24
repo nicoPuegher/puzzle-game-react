@@ -13,6 +13,7 @@ const GameContext = React.createContext({
   playerStage: (stage) => {},
   currentVictory: (currentVictoryArr) => {},
   currentPlayer: (currentPlayerArr) => {},
+  blocksMove: (id) => {},
 });
 
 export default GameContext;

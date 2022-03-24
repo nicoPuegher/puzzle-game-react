@@ -11,16 +11,15 @@ const TableData = ({ id, size }) => {
   const gameCtx = useContext(GameContext);
   const responsive = checkScreen(size);
 
-  const clickHandler = (event) => {
-    blocksMovement(+event.target.id, size);
+  const clickHandler = () => {
+    const isValid = blocksMovement(id, size);
+    if (isValid) {
+      gameCtx.blocksMove(id);
+    }
   };
 
   return (
-    <td
-      id={id}
-      className={`${styles.td} ${styles[responsive]}`}
-      onClick={clickHandler}
-    >
+    <td className={`${styles.td} ${styles[responsive]}`} onClick={clickHandler}>
       {gameCtx.playerArr[id]}
     </td>
   );

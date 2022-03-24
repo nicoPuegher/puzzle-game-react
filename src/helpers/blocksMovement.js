@@ -8,8 +8,10 @@ const blocksMovement = (id, size) => {
   }
 
   if (move === 1 || move === size) {
-    console.log('move');
+    return true;
   }
+
+  return false;
 };
 
 export default blocksMovement;
