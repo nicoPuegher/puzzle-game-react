@@ -1,25 +1,25 @@
-import { useEffect, useContext } from 'react';
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styles from './TableData.module.css';
 import checkScreen from '../../../helpers/checkScreen';
-import gameArrays from '../../../helpers/gameArrays';
 import GameContext from '../../../store/gameContext';
 
 const TableData = ({ id, size }) => {
   const gameCtx = useContext(GameContext);
   const responsive = checkScreen(size);
 
-  useEffect(() => {
-    const { victory } = gameArrays(size);
-    const { playerArr } = gameArrays(size);
-
-    gameCtx.currentVictory(victory);
-    gameCtx.currentPlayer(playerArr);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const clickHandler = (event) => {
+    console.log(event);
+  };
 
   return (
-    <td id={id} className={`${styles.td} ${styles[responsive]}`}>
+    <td
+      id={id}
+      className={`${styles.td} ${styles[responsive]}`}
+      onClick={clickHandler}
+    >
       {gameCtx.playerArr[id]}
     </td>
   );
