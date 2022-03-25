@@ -23,7 +23,14 @@ const Puzzle = ({ playerSettings }) => {
 
   for (let row = 0; row < size; row += 1) {
     const idArr = puzzleId(size, row);
-    tableRow.push(<TableRow key={`tr${row + 1}`} id={idArr} size={size} />);
+    tableRow.push(
+      <TableRow
+        key={`tr${row + 1}`}
+        id={`tr${row + 1}`}
+        idArr={idArr}
+        size={size}
+      />
+    );
   }
 
   return (

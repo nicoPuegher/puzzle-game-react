@@ -40,7 +40,7 @@ const gameReducer = (state, action) => {
     const clickedBlock = action.id;
     const blankBlock = state.playerArr.indexOf('');
 
-    const newArr = JSON.parse(JSON.stringify(state.playerArr));
+    const newArr = [...state.playerArr];
     newArr[blankBlock] = newArr[clickedBlock];
     newArr[clickedBlock] = '';
 
