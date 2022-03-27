@@ -5,6 +5,7 @@ import GameContext from '../../store/gameContext';
 import gameArrays from '../../helpers/gameArrays';
 import puzzleId from '../../helpers/puzzleId';
 import TableRow from './TableRow/TableRow';
+import createImage from '../../helpers/createImage';
 
 const Puzzle = ({ playerSettings }) => {
   const gameCtx = useContext(GameContext);
@@ -13,8 +14,9 @@ const Puzzle = ({ playerSettings }) => {
   const tableRow = [];
 
   useEffect(() => {
-    const { victoryArr } = gameArrays(size);
-    const { playerArr } = gameArrays(size);
+    const imagePieces = createImage(size);
+    const { victoryArr } = gameArrays(playerSettings.mode, imagePieces, size);
+    const { playerArr } = gameArrays(playerSettings.mode, imagePieces, size);
 
     gameCtx.currentVictory(victoryArr);
     gameCtx.currentPlayer(playerArr);
@@ -28,6 +30,7 @@ const Puzzle = ({ playerSettings }) => {
         key={`tr${row + 1}`}
         id={`tr${row + 1}`}
         idArr={idArr}
+        mode={playerSettings.mode}
         size={size}
       />
     );

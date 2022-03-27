@@ -11,7 +11,7 @@ import {
   checkRowBlankPosition,
 } from '../../../helpers/updateBlankPosition';
 
-const TableData = ({ id, size }) => {
+const TableData = ({ id, mode, size }) => {
   const tdRef = useRef();
   const gameCtx = useContext(GameContext);
   const responsive = checkScreen(size);
@@ -34,6 +34,15 @@ const TableData = ({ id, size }) => {
     }
   };
 
+  let modeContent;
+  if (mode === 'Image') {
+    modeContent = <img src={gameCtx.playerArr[id]} alt="" />;
+  }
+
+  if (mode === 'Numbers') {
+    modeContent = gameCtx.playerArr[id];
+  }
+
   return (
     <td
       className={`${styles.td} ${styles[responsive]}`}
@@ -41,13 +50,14 @@ const TableData = ({ id, size }) => {
       onClick={clickHandler}
       ref={tdRef}
     >
-      {gameCtx.playerArr[id]}
+      {modeContent}
     </td>
   );
 };
 
 TableData.propTypes = {
   id: PropTypes.number.isRequired,
+  mode: PropTypes.string.isRequired,
   size: PropTypes.number.isRequired,
 };
 

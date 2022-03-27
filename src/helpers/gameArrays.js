@@ -1,13 +1,21 @@
 import updateBlankPosition from './updateBlankPosition';
 
-const gameArrays = (size) => {
+const gameArrays = (mode, imagePieces, size) => {
   const victoryArr = [];
   let playerArr = [];
 
   const puzzleSize = size * size;
 
-  for (let i = 1; i <= puzzleSize; i += 1) {
-    victoryArr.push(i);
+  if (mode === 'Image') {
+    for (let i = 1; i <= puzzleSize; i += 1) {
+      victoryArr.push(imagePieces[i]);
+    }
+  }
+
+  if (mode === 'Numbers') {
+    for (let i = 1; i <= puzzleSize; i += 1) {
+      victoryArr.push(i);
+    }
   }
 
   victoryArr.splice(0, 0, 'empty');

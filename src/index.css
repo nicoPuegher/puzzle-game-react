@@ -85,6 +85,11 @@ button {
   box-shadow: 0rem 0.25rem var(--black);
 }
 
+img {
+  display: block;
+  border-radius: 0.3rem;
+}
+
 @media (min-width: 280px) and (max-width: 360px) {
   h1 {
     font-size: 2.6rem;
@@ -139,5 +144,9 @@ button {
     color: var(--dark);
     background-color: var(--primary);
     box-shadow: 0rem 0.25rem var(--dark);
+  }
+
+  img:hover {
+    opacity: 0.5;
   }
 }
