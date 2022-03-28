@@ -4,33 +4,34 @@ const checkScreen = (size) => {
 
   switch (size) {
     case 3:
-      if (window.screen <= 320) {
+      if (windowScreen <= 320) {
         responsive = 'small3';
-      }
-      if (windowScreen <= 414) {
+      } else if (windowScreen <= 414) {
         responsive = 'medium3';
+      } else {
+        responsive = 'big3';
+        break;
       }
-      responsive = 'big3';
       break;
 
     case 4:
-      if (window.screen <= 320) {
+      if (windowScreen <= 320) {
         responsive = 'small4';
-      }
-      if (windowScreen <= 414) {
+      } else if (windowScreen <= 414) {
         responsive = 'medium4';
+      } else {
+        responsive = 'big4';
       }
-      responsive = 'big4';
       break;
 
     case 5:
-      if (window.screen <= 320) {
+      if (windowScreen <= 320) {
         responsive = 'small5';
-      }
-      if (windowScreen <= 414) {
+      } else if (windowScreen <= 414) {
         responsive = 'medium4';
+      } else {
+        responsive = 'big5';
       }
-      responsive = 'big5';
       break;
 
     default:

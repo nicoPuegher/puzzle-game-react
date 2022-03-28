@@ -1,7 +1,7 @@
 import React, { useReducer, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import GameContext from './gameContext';
-import updateBlankPosition from '../helpers/updateBlankPosition';
+// import updateBlankPosition from '../helpers/updateBlankPosition';
 
 const defaultState = {
   currentStage: {
@@ -37,19 +37,21 @@ const gameReducer = (state, action) => {
   }
 
   if (action.type === 'MOVEMENT') {
-    const clickedBlock = action.id;
-    const blankBlock = state.playerArr.indexOf('');
+    // const clickedBlock = action.id;
+    // const blankBlock = state.playerArr.indexOf('');
 
-    const newArr = [...state.playerArr];
-    newArr[blankBlock] = newArr[clickedBlock];
-    newArr[clickedBlock] = '';
+    // const newArr = [...state.playerArr];
+    // console.log(newArr[blankBlock]);
+    // console.log(newArr[clickedBlock]);
+    // newArr[blankBlock] = newArr[clickedBlock];
+    // newArr[clickedBlock] = '';
 
-    const updatedBlank = newArr.indexOf('');
-    updateBlankPosition(updatedBlank);
+    // const updatedBlank = newArr.indexOf('');
+    // updateBlankPosition(updatedBlank);
 
     return {
       ...state,
-      playerArr: newArr,
+      playerArr: '',
     };
   }
 
