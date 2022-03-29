@@ -11,8 +11,9 @@ const GameContext = React.createContext({
   victoryArr: [],
   playerArr: [],
   playerStage: (stage) => {},
-  currentVictory: (currentVictoryArr) => {},
-  currentPlayer: (currentPlayerArr) => {},
+  gameArrays: (currentVictoryArr, currentPlayerArr) => {},
+  // currentVictory: (currentVictoryArr) => {},
+  // currentPlayer: (currentPlayerArr) => {},
   blocksMove: (id) => {},
 });
 

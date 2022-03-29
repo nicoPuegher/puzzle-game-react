@@ -22,19 +22,27 @@ const gameReducer = (state, action) => {
     };
   }
 
-  if (action.type === 'WINARR') {
+  if (action.type === 'ARR') {
     return {
       ...state,
       victoryArr: action.currentVictoryArr,
-    };
-  }
-
-  if (action.type === 'PLAYERARR') {
-    return {
-      ...state,
       playerArr: action.currentPlayerArr,
     };
   }
+
+  // if (action.type === 'WINARR') {
+  //   return {
+  //     ...state,
+  //     victoryArr: action.currentVictoryArr,
+  //   };
+  // }
+
+  // if (action.type === 'PLAYERARR') {
+  //   return {
+  //     ...state,
+  //     playerArr: action.currentPlayerArr,
+  //   };
+  // }
 
   if (action.type === 'MOVEMENT') {
     // const clickedBlock = action.id;
@@ -68,19 +76,27 @@ const GameProvider = ({ children }) => {
     });
   };
 
-  const currentVictoryHandler = (currentVictoryArr) => {
+  const gameArraysHandler = (currentVictoryArr, currentPlayerArr) => {
     dispatchGameAction({
-      type: 'WINARR',
+      type: 'ARR',
       currentVictoryArr,
-    });
-  };
-
-  const currentPlayerHandler = (currentPlayerArr) => {
-    dispatchGameAction({
-      type: 'PLAYERARR',
       currentPlayerArr,
     });
   };
+
+  // const currentVictoryHandler = (currentVictoryArr) => {
+  //   dispatchGameAction({
+  //     type: 'WINARR',
+  //     currentVictoryArr,
+  //   });
+  // };
+
+  // const currentPlayerHandler = (currentPlayerArr) => {
+  //   dispatchGameAction({
+  //     type: 'PLAYERARR',
+  //     currentPlayerArr,
+  //   });
+  // };
 
   const blocksMoveHandler = (id) => {
     dispatchGameAction({
@@ -95,8 +111,9 @@ const GameProvider = ({ children }) => {
       victoryArr: gameState.victoryArr,
       playerArr: gameState.playerArr,
       playerStage: playerStageHandler,
-      currentVictory: currentVictoryHandler,
-      currentPlayer: currentPlayerHandler,
+      gameArrays: gameArraysHandler,
+      // currentVictory: currentVictoryHandler,
+      // currentPlayer: currentPlayerHandler,
       blocksMove: blocksMoveHandler,
     }),
     [gameState]
