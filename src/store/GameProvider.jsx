@@ -30,21 +30,14 @@ const gameReducer = (state, action) => {
     };
   }
 
-  // if (action.type === 'WINARR') {
-  //   return {
-  //     ...state,
-  //     victoryArr: action.currentVictoryArr,
-  //   };
-  // }
-
-  // if (action.type === 'PLAYERARR') {
-  //   return {
-  //     ...state,
-  //     playerArr: action.currentPlayerArr,
-  //   };
-  // }
-
   if (action.type === 'MOVEMENT') {
+    const clickedBlock = action.id;
+    const blankBlock = state.playerArr.indexOf('');
+
+    const newArr = [...state.playerArr];
+    newArr[blankBlock] = newArr[clickedBlock];
+    newArr[clickedBlock] = '';
+
     // const clickedBlock = action.id;
     // const blankBlock = state.playerArr.indexOf('');
 
@@ -59,7 +52,7 @@ const gameReducer = (state, action) => {
 
     return {
       ...state,
-      playerArr: '',
+      playerArr: newArr,
     };
   }
 
@@ -84,20 +77,6 @@ const GameProvider = ({ children }) => {
     });
   };
 
-  // const currentVictoryHandler = (currentVictoryArr) => {
-  //   dispatchGameAction({
-  //     type: 'WINARR',
-  //     currentVictoryArr,
-  //   });
-  // };
-
-  // const currentPlayerHandler = (currentPlayerArr) => {
-  //   dispatchGameAction({
-  //     type: 'PLAYERARR',
-  //     currentPlayerArr,
-  //   });
-  // };
-
   const blocksMoveHandler = (id) => {
     dispatchGameAction({
       type: 'MOVEMENT',
@@ -112,8 +91,6 @@ const GameProvider = ({ children }) => {
       playerArr: gameState.playerArr,
       playerStage: playerStageHandler,
       gameArrays: gameArraysHandler,
-      // currentVictory: currentVictoryHandler,
-      // currentPlayer: currentPlayerHandler,
       blocksMove: blocksMoveHandler,
     }),
     [gameState]
