@@ -2,6 +2,7 @@ import React, { useReducer, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import GameContext from './gameContext';
 import updateBlankPosition from '../helpers/updateBlankPosition';
+import checkWin from '../helpers/checkWin';
 
 const defaultState = {
   currentStage: {
@@ -49,6 +50,9 @@ const gameReducer = (state, action) => {
     updateBlankPosition(updatedBlank);
 
     const currentMoves = state.playerMoves - 1;
+
+    const win = checkWin(state.victoryArr, newArr);
+    console.log(win);
 
     // const clickedBlock = action.id;
     // const blankBlock = state.playerArr.indexOf('');
