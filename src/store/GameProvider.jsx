@@ -2,7 +2,7 @@ import React, { useReducer, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import GameContext from './gameContext';
 import updateBlankPosition from '../helpers/updateBlankPosition';
-import checkWin from '../helpers/checkWin';
+// import checkWin from '../helpers/checkWin';
 
 const defaultState = {
   currentStage: {
@@ -13,6 +13,8 @@ const defaultState = {
   },
   victoryArr: [],
   playerArr: [],
+  playerMoves: 0,
+  win: false,
 };
 
 const gameReducer = (state, action) => {
@@ -39,6 +41,7 @@ const gameReducer = (state, action) => {
   }
 
   if (action.type === 'MOVEMENT') {
+    console.log(state);
     const clickedBlock = action.id;
     const blankBlock = state.playerArr.indexOf('');
 
@@ -49,10 +52,9 @@ const gameReducer = (state, action) => {
     const updatedBlank = newArr.indexOf('');
     updateBlankPosition(updatedBlank);
 
-    const currentMoves = state.playerMoves - 1;
+    // const currentMoves = state.playerMoves - 1;
 
-    const win = checkWin(state.victoryArr, newArr);
-    console.log(win);
+    // const win = checkWin(state.victoryArr, newArr);
 
     // const clickedBlock = action.id;
     // const blankBlock = state.playerArr.indexOf('');
@@ -69,7 +71,8 @@ const gameReducer = (state, action) => {
     return {
       ...state,
       playerArr: newArr,
-      playerMoves: currentMoves,
+      // playerMoves: currentMoves,
+      // win,
     };
   }
 
@@ -114,6 +117,7 @@ const GameProvider = ({ children }) => {
       victoryArr: gameState.victoryArr,
       playerArr: gameState.playerArr,
       playerMoves: gameState.playerMoves,
+      win: gameState.win,
       playerStage: playerStageHandler,
       maxMoves: maxMovesHandler,
       gameArrays: gameArraysHandler,

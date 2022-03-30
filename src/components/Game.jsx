@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import GameContext from '../store/gameContext';
 import Play from './Play/Play';
 import Settings from './Settings/Settings';
@@ -8,6 +8,18 @@ const Game = () => {
   const gameCtx = useContext(GameContext);
   const [gameScreen, setGameScreen] = useState('play');
   const [playerSettings, setPlayerSettings] = useState({ mode: '', size: '' });
+
+  useEffect(() => {
+    if (gameCtx.win) {
+      gameCtx.playerStage({
+        title: 'You won!',
+        subtitle: 'Want to play again?',
+        text: 'Please, select your game preferences',
+        btnText: 'Play Again',
+      });
+      setGameScreen('play');
+    }
+  }, [gameCtx.win]);
 
   const changeScreenHandler = (screen) => {
     setGameScreen(screen);

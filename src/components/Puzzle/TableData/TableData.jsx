@@ -36,6 +36,7 @@ const TableData = ({ id, mode, size }) => {
   }, []);
 
   useEffect(() => {
+    console.log('runs');
     const { victoryArr, playerArr } = gameArrays(mode, puzzleSize, images);
     gameCtx.gameArrays(victoryArr, playerArr);
   }, [images]);
