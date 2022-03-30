@@ -16,16 +16,19 @@ import {
 import gameArrays from '../../../helpers/gameArrays';
 import blocksMovement from '../../../helpers/blocksMovement';
 
-const TableData = ({ id, size }) => {
+const TableData = ({ id, mode, size }) => {
   const [images, setImages] = useState([]);
   const gameCtx = useContext(GameContext);
   const tdRef = useRef(null);
 
   const responsive = checkScreen(size);
   const puzzleSize = size * size;
+  let gameContent;
 
   useEffect(() => {
-    createImgSlices(img, size).then((res) => setImages(res));
+    if (mode === 'Image') {
+      createImgSlices(img, size).then((res) => setImages(res));
+    }
 
     if (id === puzzleSize) {
       updateRowBlankPosition(tdRef.current);
@@ -33,18 +36,40 @@ const TableData = ({ id, size }) => {
   }, []);
 
   useEffect(() => {
-    const { victoryArr, playerArr } = gameArrays(images);
+    const { victoryArr, playerArr } = gameArrays(mode, puzzleSize, images);
     gameCtx.gameArrays(victoryArr, playerArr);
   }, [images]);
 
+  if (mode === 'Image') {
+    gameContent = <img src={gameCtx.playerArr[id]} alt="" />;
+  }
+
+  if (mode === 'Numbers') {
+    gameContent = `${gameCtx.playerArr[id]}`;
+  }
+
   const clickHandler = (event) => {
-    // parentElement because img is clicked, not td
-    const isRowValid = checkRowBlankPosition(event.target.parentElement);
+    let isRowValid;
+
+    if (mode === 'Image') {
+      isRowValid = checkRowBlankPosition(event.target.parentElement);
+    }
+
+    if (mode === 'Numbers') {
+      isRowValid = checkRowBlankPosition(event.target);
+    }
+
     const isValid = blocksMovement(id, size, isRowValid);
 
     if (isValid) {
       gameCtx.blocksMove(id);
-      updateRowBlankPosition(event.target.parentElement);
+      if (mode === 'Image') {
+        updateRowBlankPosition(event.target.parentElement);
+      }
+
+      if (mode === 'Numbers') {
+        updateRowBlankPosition(event.target);
+      }
     }
   };
 
@@ -54,13 +79,14 @@ const TableData = ({ id, size }) => {
       onClick={clickHandler}
       ref={tdRef}
     >
-      <img src={gameCtx.playerArr[id]} alt="" />
+      {gameContent}
     </td>
   );
 };
 
 TableData.propTypes = {
   id: PropTypes.number.isRequired,
+  mode: PropTypes.string.isRequired,
   size: PropTypes.number.isRequired,
 };
 

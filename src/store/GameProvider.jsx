@@ -22,6 +22,13 @@ const gameReducer = (state, action) => {
     };
   }
 
+  if (action.type === 'MAX') {
+    return {
+      ...state,
+      playerMoves: action.maxMoves,
+    };
+  }
+
   if (action.type === 'ARR') {
     return {
       ...state,
@@ -41,6 +48,8 @@ const gameReducer = (state, action) => {
     const updatedBlank = newArr.indexOf('');
     updateBlankPosition(updatedBlank);
 
+    const currentMoves = state.playerMoves - 1;
+
     // const clickedBlock = action.id;
     // const blankBlock = state.playerArr.indexOf('');
 
@@ -56,6 +65,7 @@ const gameReducer = (state, action) => {
     return {
       ...state,
       playerArr: newArr,
+      playerMoves: currentMoves,
     };
   }
 
@@ -69,6 +79,13 @@ const GameProvider = ({ children }) => {
     dispatchGameAction({
       type: 'STAGE',
       playerStage,
+    });
+  };
+
+  const maxMovesHandler = (maxMoves) => {
+    dispatchGameAction({
+      type: 'MAX',
+      maxMoves,
     });
   };
 
@@ -92,7 +109,9 @@ const GameProvider = ({ children }) => {
       currentStage: gameState.currentStage,
       victoryArr: gameState.victoryArr,
       playerArr: gameState.playerArr,
+      playerMoves: gameState.playerMoves,
       playerStage: playerStageHandler,
+      maxMoves: maxMovesHandler,
       gameArrays: gameArraysHandler,
       blocksMove: blocksMoveHandler,
     }),
