@@ -16,6 +16,7 @@ const GameContext = React.createContext({
   maxMoves: (maxMoves) => {},
   gameArrays: (currentVictoryArr, currentPlayerArr) => {},
   blocksMove: (id) => {},
+  defaultState: () => {},
 });
 
 export default GameContext;

@@ -2,7 +2,7 @@ import React, { useReducer, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import GameContext from './gameContext';
 import updateBlankPosition from '../helpers/updateBlankPosition';
-// import checkWin from '../helpers/checkWin';
+import checkWin from '../helpers/checkWin';
 
 const defaultState = {
   currentStage: {
@@ -18,6 +18,12 @@ const defaultState = {
 };
 
 const gameReducer = (state, action) => {
+  if (action.type === 'DEFAULT') {
+    return {
+      ...defaultState,
+    };
+  }
+
   if (action.type === 'STAGE') {
     return {
       ...state,
@@ -41,7 +47,6 @@ const gameReducer = (state, action) => {
   }
 
   if (action.type === 'MOVEMENT') {
-    console.log(state);
     const clickedBlock = action.id;
     const blankBlock = state.playerArr.indexOf('');
 
@@ -52,27 +57,14 @@ const gameReducer = (state, action) => {
     const updatedBlank = newArr.indexOf('');
     updateBlankPosition(updatedBlank);
 
-    // const currentMoves = state.playerMoves - 1;
-
-    // const win = checkWin(state.victoryArr, newArr);
-
-    // const clickedBlock = action.id;
-    // const blankBlock = state.playerArr.indexOf('');
-
-    // const newArr = [...state.playerArr];
-    // console.log(newArr[blankBlock]);
-    // console.log(newArr[clickedBlock]);
-    // newArr[blankBlock] = newArr[clickedBlock];
-    // newArr[clickedBlock] = '';
-
-    // const updatedBlank = newArr.indexOf('');
-    // updateBlankPosition(updatedBlank);
+    const currentMoves = state.playerMoves - 1;
+    const win = checkWin(state.victoryArr, newArr);
 
     return {
       ...state,
       playerArr: newArr,
-      // playerMoves: currentMoves,
-      // win,
+      playerMoves: currentMoves,
+      win,
     };
   }
 
@@ -81,6 +73,12 @@ const gameReducer = (state, action) => {
 
 const GameProvider = ({ children }) => {
   const [gameState, dispatchGameAction] = useReducer(gameReducer, defaultState);
+
+  const defaultStateHandler = () => {
+    dispatchGameAction({
+      type: 'DEFAULT',
+    });
+  };
 
   const playerStageHandler = (playerStage) => {
     dispatchGameAction({
@@ -122,6 +120,7 @@ const GameProvider = ({ children }) => {
       maxMoves: maxMovesHandler,
       gameArrays: gameArraysHandler,
       blocksMove: blocksMoveHandler,
+      defaultState: defaultStateHandler,
     }),
     [gameState]
   );

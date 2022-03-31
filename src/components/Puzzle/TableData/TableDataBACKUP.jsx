@@ -1,64 +1,92 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useRef, useContext, useEffect } from 'react';
+
+import { useState, useContext, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './TableData.module.css';
-import checkScreen from '../../../helpers/checkScreen';
 import GameContext from '../../../store/gameContext';
-import blocksMovement from '../../../helpers/blocksMovement';
+import checkScreen from '../../../helpers/checkScreen';
+import createImgSlices from '../../../helpers/createImgSlices';
+import img from '../../../image/dog.jpg';
 import {
   updateRowBlankPosition,
   checkRowBlankPosition,
 } from '../../../helpers/updateBlankPosition';
+import gameArrays from '../../../helpers/gameArrays';
+import blocksMovement from '../../../helpers/blocksMovement';
 
-const TableData = ({ id, size }) => {
-  const tdRef = useRef();
+const TableData = ({ id, mode, size }) => {
+  const [images, setImages] = useState([]);
   const gameCtx = useContext(GameContext);
+  const tdRef = useRef(null);
+
   const responsive = checkScreen(size);
   const puzzleSize = size * size;
+  let gameContent;
 
   useEffect(() => {
+    if (mode === 'Image') {
+      createImgSlices(img, size).then((res) => setImages(res));
+    }
+
     if (id === puzzleSize) {
       updateRowBlankPosition(tdRef.current);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    const { victoryArr, playerArr } = gameArrays(mode, puzzleSize, images);
+    gameCtx.gameArrays(victoryArr, playerArr);
+  }, [images]);
+
+  if (mode === 'Image') {
+    gameContent = <img src={gameCtx.playerArr[id]} alt="" />;
+  }
+
+  if (mode === 'Numbers') {
+    gameContent = `${gameCtx.playerArr[id]}`;
+  }
+
   const clickHandler = (event) => {
-    const isRowValid = checkRowBlankPosition(event.target);
+    let isRowValid;
+
+    if (mode === 'Image') {
+      isRowValid = checkRowBlankPosition(event.target.parentElement);
+    }
+
+    if (mode === 'Numbers') {
+      isRowValid = checkRowBlankPosition(event.target);
+    }
+
     const isValid = blocksMovement(id, size, isRowValid);
 
     if (isValid) {
       gameCtx.blocksMove(id);
-      updateRowBlankPosition(event.target);
+      if (mode === 'Image') {
+        updateRowBlankPosition(event.target.parentElement);
+      }
+
+      if (mode === 'Numbers') {
+        updateRowBlankPosition(event.target);
+      }
     }
   };
-
-  // let modeContent;
-  // if (mode === 'Image') {
-  //   modeContent = <img src={gameCtx.playerArr[id]} alt="" />;
-  // }
-
-  // if (mode === 'Numbers') {
-  //   modeContent = gameCtx.playerArr[id];
-  // }
 
   return (
     <td
       className={`${styles.td} ${styles[responsive]}`}
-      id={id}
       onClick={clickHandler}
       ref={tdRef}
     >
-      {/* {modeContent} */}
-      {gameCtx.playerArr[id]}
+      {gameContent}
     </td>
   );
 };
 
 TableData.propTypes = {
   id: PropTypes.number.isRequired,
-  // mode: PropTypes.string.isRequired,
+  mode: PropTypes.string.isRequired,
   size: PropTypes.number.isRequired,
 };
 

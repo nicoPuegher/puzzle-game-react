@@ -1,11 +1,17 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import GameContext from '../../store/gameContext';
 import styles from './Settings.module.css';
 import Options from './Options/Options';
 
 const Settings = ({ onSubmit, onChangeScreen }) => {
   const [isDisabled, setIsDisabled] = useState({ mode: true, size: true });
   const [playerSettings, setPlayerSettings] = useState({ mode: '', size: '' });
+  const gameCtx = useContext(GameContext);
+
+  useEffect(() => {
+    gameCtx.defaultState();
+  }, []);
 
   const submitHandler = (event) => {
     event.preventDefault();

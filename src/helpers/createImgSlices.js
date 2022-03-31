@@ -29,8 +29,6 @@ const createImage = (image, size) => {
       imagePieces.push(canvas.toDataURL());
     }
   }
-  // imagePieces.splice(0, 0, 'empty');
-  // imagePieces.splice(imagePieces.length - 1, 1, '');
   return imagePieces;
 };
 
