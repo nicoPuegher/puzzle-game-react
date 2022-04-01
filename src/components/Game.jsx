@@ -19,7 +19,17 @@ const Game = () => {
       });
       setGameScreen('play');
     }
-  }, [gameCtx.win]);
+
+    if (gameCtx.lose) {
+      gameCtx.playerStage({
+        title: 'You lost!',
+        subtitle: 'Want to try again?',
+        text: 'Please, select your game preferences',
+        btnText: 'Try Again',
+      });
+      setGameScreen('play');
+    }
+  }, [gameCtx.win, gameCtx.lose]);
 
   const changeScreenHandler = (screen) => {
     setGameScreen(screen);

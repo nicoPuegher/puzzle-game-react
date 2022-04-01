@@ -13,8 +13,9 @@ const defaultState = {
   },
   victoryArr: [],
   playerArr: [],
-  playerMoves: 0,
+  playerMoves: 200,
   win: false,
+  lose: false,
 };
 
 const gameReducer = (state, action) => {
@@ -60,11 +61,18 @@ const gameReducer = (state, action) => {
     const currentMoves = state.playerMoves - 1;
     const win = checkWin(state.victoryArr, newArr);
 
+    let lose;
+
+    if (state.playerMoves === 1) {
+      lose = true;
+    }
+
     return {
       ...state,
       playerArr: newArr,
       playerMoves: currentMoves,
       win,
+      lose,
     };
   }
 
@@ -116,6 +124,7 @@ const GameProvider = ({ children }) => {
       playerArr: gameState.playerArr,
       playerMoves: gameState.playerMoves,
       win: gameState.win,
+      lose: gameState.lose,
       playerStage: playerStageHandler,
       maxMoves: maxMovesHandler,
       gameArrays: gameArraysHandler,
