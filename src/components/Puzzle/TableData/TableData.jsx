@@ -16,14 +16,14 @@ const TableData = ({ id, mode, size }) => {
   const tdRef = useRef(null);
 
   const responsive = checkScreen(size);
-  const puzzleSize = size * size;
+  // const puzzleSize = size * size;
   let content;
 
   useEffect(() => {
-    if (id === puzzleSize - 1) {
+    if (gameCtx.playerArr[id] === '') {
       updateRowBlankPosition(tdRef.current);
     }
-  }, []);
+  }, [gameCtx.playerArr]);
 
   const clickHandler = (event) => {
     const isRowValid = checkRowBlankPosition(event.target.parentElement);
