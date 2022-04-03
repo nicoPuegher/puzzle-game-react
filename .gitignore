@@ -10,7 +10,10 @@
 # misc
 .DS_Store
 .vscode
+.firebase
 .eslintrc.json
 .prettierrc
+.firebaserc
+
 
 npm-debug.log*

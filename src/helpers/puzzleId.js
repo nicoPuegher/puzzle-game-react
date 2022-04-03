@@ -4,13 +4,13 @@ const puzzleId = (size, row) => {
   if (size === 3) {
     switch (row) {
       case 0:
-        arr = [1, 2, 3];
+        arr = [0, 1, 2];
         break;
       case 1:
-        arr = [4, 5, 6];
+        arr = [3, 4, 5];
         break;
       case 2:
-        arr = [7, 8, 9];
+        arr = [6, 7, 8];
         break;
       default:
         break;
@@ -20,16 +20,16 @@ const puzzleId = (size, row) => {
   if (size === 4) {
     switch (row) {
       case 0:
-        arr = [1, 2, 3, 4];
+        arr = [0, 1, 2, 3];
         break;
       case 1:
-        arr = [5, 6, 7, 8];
+        arr = [4, 5, 6, 7];
         break;
       case 2:
-        arr = [9, 10, 11, 12];
+        arr = [8, 9, 10, 11];
         break;
       case 3:
-        arr = [13, 14, 15, 16];
+        arr = [12, 13, 14, 15];
         break;
       default:
         break;
@@ -39,19 +39,19 @@ const puzzleId = (size, row) => {
   if (size === 5) {
     switch (row) {
       case 0:
-        arr = [1, 2, 3, 4, 5];
+        arr = [0, 1, 2, 3, 4];
         break;
       case 1:
-        arr = [6, 7, 8, 9, 10];
+        arr = [5, 6, 7, 8, 9];
         break;
       case 2:
-        arr = [11, 12, 13, 14, 15];
+        arr = [10, 11, 12, 13, 14];
         break;
       case 3:
-        arr = [16, 17, 18, 19, 20];
+        arr = [15, 16, 17, 18, 19];
         break;
       case 4:
-        arr = [21, 22, 23, 24, 25];
+        arr = [20, 21, 22, 23, 24];
         break;
       default:
         break;

@@ -45,7 +45,7 @@ const Puzzle = ({ playerSettings }) => {
   return (
     <section className={styles.puzzle}>
       <header>
-        <h1>JavaScript Puzzle</h1>
+        <h1>ReactJS Puzzle</h1>
         <p>Movements left</p>
         <span>{gameCtx.playerMoves}</span>
       </header>

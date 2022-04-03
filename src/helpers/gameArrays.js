@@ -14,11 +14,15 @@ const gameArrays = (mode, puzzleSize, images) => {
     }
   }
 
-  victoryArr.splice(0, 0, 'empty');
   victoryArr.splice(victoryArr.length - 1, 1, '');
-  updateBlankPosition(victoryArr.indexOf(''));
-
   playerArr = [...victoryArr];
+
+  for (let i = playerArr.length - 1; i > 0; i -= 1) {
+    const random = Math.floor(Math.random() * (i + 1));
+    [playerArr[i], playerArr[random]] = [playerArr[random], playerArr[i]];
+  }
+
+  updateBlankPosition(playerArr.indexOf(''));
 
   return { victoryArr, playerArr };
 };
