@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useContext, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styles from './TableData.module.css';
@@ -16,7 +14,6 @@ const TableData = ({ id, mode, size }) => {
   const tdRef = useRef(null);
 
   const responsive = checkScreen(size);
-  // const puzzleSize = size * size;
   let content;
 
   useEffect(() => {

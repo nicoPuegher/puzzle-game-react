@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-async-promise-executor */
-/* eslint-disable no-plusplus */
 const createImage = (image, size) => {
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d');
