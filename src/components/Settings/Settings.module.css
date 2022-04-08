@@ -18,6 +18,9 @@
 @media (min-width: 280px) and (max-width: 360px) {
   .form {
     padding: 2rem 0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .form__container {
